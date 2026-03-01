@@ -1,320 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Digital Exam Preparation Portal</title>
+
 <style>
-  body {
-    margin: 0; 
-    font-family: Arial, sans-serif; 
-    background: #dbe9ff; 
-    color: #2c3e50;
-  }
-  nav {
-    background: #f7f4d9; 
-    padding: 8px 12px; 
-    display: flex; 
-    align-items: center; 
-    gap: 8px; 
-    flex-wrap: wrap;
-  }
-  nav button {
-    background: #f7f4d9; 
-    border: 1px solid #ccc; 
-    padding: 6px 12px; 
-    cursor: pointer; 
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-  }
-  nav button:hover,
-  nav button.active {
-    background-color: #fff9cc;
-  }
-  .search-container {
-    display: flex; 
-    align-items: center; 
-    background: #fff9cc; 
-    border: 1px solid #ccc;
-    border-radius: 4px; 
-    padding: 3px 6px; 
-    margin-left: 10px; 
-    flex-grow: 1; 
-    max-width: 300px;
-  }
-  .search-container input[type="text"] {
-    border: none; 
-    outline: none; 
-    font-size: 14px; 
-    background: transparent; 
-    padding-left: 6px; 
-    width: 100%;
-  }
-  .search-icon {
-    width: 20px; 
-    height: 20px; 
-    cursor: pointer; 
-    filter: drop-shadow(0 0 0.5px #888);
-  }
-  .content {
-    max-width: 900px; 
-    margin: 20px auto; 
-    background: #fff; 
-    padding: 20px; 
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-  h1.page-title {
-    font-weight: 600; 
-    font-size: 2rem; 
-    color: #3a7bd5; 
-    margin-bottom: 15px;
-  }
-  .subtopic {
-    background: #e8eaf6; 
-    padding: 15px; 
-    margin-bottom: 15px; 
-    border-radius: 6px;
-  }
-  .subtopic h3 {
-    margin-top: 0;
-  }
-  .subtopic p {
-    margin-bottom: 8px;
-  }
-  .subtopic a {
-    display: inline-block; 
-    margin-top: 6px; 
-    color: #1a237e; 
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .subtopic a:hover {
-    text-decoration: underline;
-  }
-  /* Admin panel styles */
-  #adminPanel {
-    margin-top: 30px;
-    border-top: 2px solid #3a7bd5;
-    padding-top: 20px;
-  }
-  #adminPanel h2 {
-    color: #3a7bd5;
-  }
-  #adminPanel label {
-    display: block;
-    margin: 10px 0 5px;
-  }
-  #adminPanel select, #adminPanel input[type="file"], #adminPanel input[type="text"], #adminPanel textarea {
-    padding: 6px;
-    font-size: 14px;
-    width: 100%;
-    max-width: 400px;
-  }
-  #adminPanel button {
-    margin-top: 15px;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    background: #3a7bd5;
-    color: white;
-    border: none;
-    border-radius: 4px;
-  }
-  #adminPanel button:hover {
-    background: #335cb0;
-  }
-  .toggle-admin {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: #3a7bd5;
-    color: white;
-    border: none;
-    padding: 10px 14px;
-    cursor: pointer;
-    border-radius: 4px;
-    z-index: 9999;
-  }
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to right,#e3f2fd,#fce4ec);
+}
+
+nav{
+    background:#1e88e5;
+    padding:12px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+nav button{
+    background:white;
+    border:none;
+    padding:8px 18px;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
+}
+
+nav button:hover{
+    background:#ffe082;
+    transform:scale(1.05);
+}
+
+nav button.active{
+    background:#ffca28;
+}
+
+.content{
+    max-width:1000px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.page-title{
+    text-align:center;
+    color:#1565c0;
+    margin-bottom:30px;
+}
+
+.subtopic{
+    background:#f5f5f5;
+    padding:18px;
+    margin-bottom:20px;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.subtopic:hover{
+    background:#e3f2fd;
+    transform:translateY(-3px);
+}
+
+.subtopic h3{
+    margin-top:0;
+    color:#0d47a1;
+}
+
+.subtopic a{
+    display:inline-block;
+    margin-top:10px;
+    padding:6px 14px;
+    background:#1e88e5;
+    color:white;
+    border-radius:20px;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.subtopic a:hover{
+    background:#0d47a1;
+}
 </style>
 </head>
+
 <body>
 
 <nav>
-  <button class="active" data-page="home">Home</button>
-  <button data-page="aptitude">Aptitude</button>
-  <button data-page="coding">Coding</button>
-  <button data-page="reasoning">Reasoning</button>
-
-  <div class="search-container" title="Search">
-    <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search" class="search-icon" />
-    <input type="text" placeholder="Search" aria-label="Search" />
-  </div>
+<button class="active" data-page="home">Home</button>
+<button data-page="aptitude">Aptitude</button>
+<button data-page="coding">Coding</button>
+<button data-page="reasoning">Reasoning</button>
 </nav>
 
 <div class="content" id="contentArea">
-  <h1 class="page-title">Home</h1>
-  <p>Welcome to the Digital Exam Preparation Portal.</p>
-</div>
-
-<!-- Admin toggle button -->
-<button class="toggle-admin" id="toggleAdminBtn">Show Admin Panel</button>
-
-<!-- Admin panel hidden by default -->
-<div class="content" id="adminPanel" style="display:none;">
-  <h2>Admin Upload Panel</h2>
-
-  <label for="subjectSelect">Select Subject:</label>
-  <select id="subjectSelect">
-    <option value="aptitude">Aptitude</option>
-    <option value="coding">Coding</option>
-    <option value="reasoning">Reasoning</option>
-  </select>
-
-  <label for="subtopicInput">Subtopic Title:</label>
-  <input type="text" id="subtopicInput" placeholder="Enter subtopic title" />
-
-  <label for="notesInput">Notes (optional):</label>
-  <textarea id="notesInput" rows="4" style="width:100%;" placeholder="Enter notes about the subtopic"></textarea>
-
-  <label for="pdfInput">Upload PDF Document:</label>
-  <input type="file" id="pdfInput" accept="application/pdf" />
-
-  <button id="uploadBtn">Upload Document</button>
+<h1 class="page-title">Home</h1>
+<p style="text-align:center;font-size:18px;">
+Welcome to the Digital Exam Preparation Portal 🚀  
+Select a subject from above to start learning.
+</p>
 </div>
 
 <script>
-  const navButtons = document.querySelectorAll('nav button[data-page]');
-  const contentArea = document.getElementById('contentArea');
+const navButtons = document.querySelectorAll('nav button');
+const contentArea = document.getElementById('contentArea');
 
-  const toggleAdminBtn = document.getElementById('toggleAdminBtn');
-  const adminPanel = document.getElementById('adminPanel');
+let materials = {
 
-  const ADMIN_PASSWORD = "akshaya@2007"; // <-- updated password
+aptitude:[
+{
+title:"Area of Triangle",
+notes:"Formula and solved examples.",
+pdfURL:"AREA%20OF%20TRIANGLE.pdf"
+},
+{
+title:"Dice",
+notes:"Important dice problems.",
+pdfURL:"DICE.pdf"
+},
+{
+title:"LCM & HCF",
+notes:"Concepts and shortcut methods.",
+pdfURL:"LCM%20%26%20HCF.pdf"
+},
+{
+title:"Percentages",
+notes:"Percentage tricks.",
+pdfURL:"PERCENTSGES.pdf"
+},
+{
+title:"Sum of Natural Numbers",
+notes:"Formula and applications.",
+pdfURL:"SUM%20OF%20NATURAL%20NUMBERS.pdf"
+}
+],
 
-  // Data structure for materials in memory
-  let materials = {
-    aptitude: [
-      {
-        title: "Percentages",
-        notes: "Understanding percentage calculation and its applications.",
-        pdfURL: "https://www.mathsisfun.com/percentage.pdf"
-      },
-      {
-        title: "Profit and Loss",
-        notes: "Learn profit, loss, and related formulas with examples.",
-        pdfURL: "https://www.mathsisfun.com/profit-loss.pdf"
-      }
-    ],
-    coding: [],
-    reasoning: []
-  };
+coding:[
+{
+title:"C Language",
+notes:"Basics and programs.",
+pdfURL:"C_LANGUAGE.pdf"
+},
+{
+title:"Java",
+notes:"OOP concepts.",
+pdfURL:"JAVA.pdf"
+},
+{
+title:"Python",
+notes:"Data types and OOP.",
+pdfURL:"PYTHON.pdf"
+},
+{
+title:"DBMS",
+notes:"SQL and normalization.",
+pdfURL:"DBMS.pdf"
+},
+{
+title:"HTML",
+notes:"Web structure.",
+pdfURL:"HTML.pdf"
+},
+{
+title:"CSS",
+notes:"Styling concepts.",
+pdfURL:"CSS.pdf"
+},
+{
+title:"JavaScript",
+notes:"DOM and events.",
+pdfURL:"JAVASCRIPT.pdf"
+}
+],
 
-  function renderPage(page) {
-    if(page === 'home'){
-      contentArea.innerHTML = `
-        <h1 class="page-title">Home</h1>
-        <p>Welcome to the Digital Exam Preparation Portal.</p>
-      `;
-      return;
-    }
+reasoning:[
+{
+title:"Reasoning Complete Material",
+notes:"Logical reasoning concepts and practice questions.",
+pdfURL:"REASONING.pdf"
+}
+]
 
-    const subs = materials[page] || [];
-    if(subs.length === 0){
-      contentArea.innerHTML = `
-        <h1 class="page-title">${page.charAt(0).toUpperCase() + page.slice(1)}</h1>
-        <p>No content available yet.</p>
-      `;
-      return;
-    }
+};
 
-    let html = `<h1 class="page-title">${page.charAt(0).toUpperCase() + page.slice(1)}</h1>`;
-    subs.forEach(sub => {
-      html += `
-        <div class="subtopic">
-          <h3>${sub.title}</h3>
-          <p>${sub.notes || ''}</p>
-          <a href="${sub.pdfURL}" target="_blank" rel="noopener noreferrer">View PDF</a>
-        </div>
-      `;
-    });
-    contentArea.innerHTML = html;
-  }
+function renderPage(page){
 
-  navButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      navButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+if(page==="home"){
+contentArea.innerHTML=`
+<h1 class="page-title">Home</h1>
+<p style="text-align:center;font-size:18px;">
+Welcome to the Digital Exam Preparation Portal 🚀  
+Select a subject from above to start learning.
+</p>`;
+return;
+}
 
-      const page = btn.dataset.page;
-      renderPage(page);
-    });
-  });
+let subs=materials[page];
 
-  // Initial load
-  renderPage('home');
+let html=`<h1 class="page-title">${page.charAt(0).toUpperCase()+page.slice(1)}</h1>`;
 
-  // Admin toggle with password
-  toggleAdminBtn.addEventListener('click', () => {
-    if(adminPanel.style.display === 'none'){
-      const password = prompt("Enter admin password to access the panel:").trim();
-      if(password === ADMIN_PASSWORD){
-        adminPanel.style.display = 'block';
-        toggleAdminBtn.textContent = 'Hide Admin Panel';
-      } else {
-        alert("Incorrect password. Access denied.");
-      }
-    } else {
-      adminPanel.style.display = 'none';
-      toggleAdminBtn.textContent = 'Show Admin Panel';
-    }
-  });
+subs.forEach(sub=>{
+html+=`
+<div class="subtopic">
+<h3>${sub.title}</h3>
+<p>${sub.notes}</p>
+<a href="${sub.pdfURL}" target="_blank">View PDF</a>
+</div>
+`;
+});
 
-  // Handle admin upload
-  const subjectSelect = document.getElementById('subjectSelect');
-  const subtopicInput = document.getElementById('subtopicInput');
-  const notesInput = document.getElementById('notesInput');
-  const pdfInput = document.getElementById('pdfInput');
-  const uploadBtn = document.getElementById('uploadBtn');
+contentArea.innerHTML=html;
+}
 
-  uploadBtn.addEventListener('click', () => {
-    const subject = subjectSelect.value.trim();
-    const title = subtopicInput.value.trim();
-    const notes = notesInput.value.trim();
-    const file = pdfInput.files[0];
+navButtons.forEach(btn=>{
+btn.addEventListener("click",()=>{
+navButtons.forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
+renderPage(btn.dataset.page);
+});
+});
 
-    if(!title){
-      alert("Please enter a subtopic title.");
-      return;
-    }
-    if(!file){
-      alert("Please select a PDF file to upload.");
-      return;
-    }
-    if(file.type !== "application/pdf"){
-      alert("Only PDF files are allowed.");
-      return;
-    }
-
-    const pdfURL = URL.createObjectURL(file);
-
-    if(!materials[subject]){
-      materials[subject] = [];
-    }
-    materials[subject].push({
-      title,
-      notes,
-      pdfURL
-    });
-
-    subtopicInput.value = "";
-    notesInput.value = "";
-    pdfInput.value = "";
-
-    renderPage(subject);
-
-    alert("Document uploaded successfully! (Note: data resets on page reload)");
-  });
+renderPage("home");
 </script>
 
 </body>
