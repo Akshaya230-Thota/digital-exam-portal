@@ -1,232 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Digital Exam Preparation Portal</title>
 
 <style>
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right,#e3f2fd,#fce4ec);
+    font-family:Segoe UI;
+    background:linear-gradient(135deg,#ffd6e8,#ffc2dd);
 }
 
+/* NAVBAR */
 nav{
-    background:#1e88e5;
-    padding:12px;
-    display:flex;
-    justify-content:center;
-    gap:20px;
+    background:#ff9ecb;
+    padding:15px;
+    text-align:center;
 }
 
 nav button{
-    background:white;
+    padding:10px 20px;
+    margin:5px;
     border:none;
-    padding:8px 18px;
-    border-radius:20px;
+    border-radius:25px;
+    background:white;
+    color:#c2185b;
+    font-weight:bold;
     cursor:pointer;
-    font-weight:600;
     transition:0.3s;
 }
 
 nav button:hover{
-    background:#ffe082;
-    transform:scale(1.05);
+    background:#ffe4f1;
 }
 
+/* ACTIVE BUTTON = BLACK */
 nav button.active{
-    background:#ffca28;
+    background:black;
+    color:white;
 }
 
+/* CONTENT */
 .content{
     max-width:1000px;
     margin:40px auto;
     background:white;
     padding:30px;
-    border-radius:12px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
 .page-title{
     text-align:center;
-    color:#1565c0;
-    margin-bottom:30px;
+    color:#c2185b;
 }
 
 .subtopic{
-    background:#f5f5f5;
-    padding:18px;
-    margin-bottom:20px;
+    background:#ffe4f1;
+    padding:15px;
+    margin:15px 0;
     border-radius:10px;
-    transition:0.3s;
-}
-
-.subtopic:hover{
-    background:#e3f2fd;
-    transform:translateY(-3px);
-}
-
-.subtopic h3{
-    margin-top:0;
-    color:#0d47a1;
 }
 
 .subtopic a{
     display:inline-block;
-    margin-top:10px;
-    padding:6px 14px;
-    background:#1e88e5;
+    margin-top:8px;
+    padding:8px 15px;
+    background:#ff69b4;
     color:white;
     border-radius:20px;
     text-decoration:none;
-    transition:0.3s;
 }
 
-.subtopic a:hover{
-    background:#0d47a1;
+/* LOGIN */
+.login-box{
+    max-width:400px;
+    margin:100px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.login-box input{
+    width:90%;
+    padding:10px;
+    margin:10px 0;
+}
+
+.login-box button{
+    padding:10px 20px;
+    background:#ff69b4;
+    color:white;
+    border:none;
+    border-radius:20px;
+}
+
+/* LOGOUT */
+.logout-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    padding:12px 20px;
+    border:none;
+    border-radius:30px;
+    background:black;
+    color:white;
+    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
+<div class="login-box" id="loginPage">
+<h2>Login</h2>
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password">
+<button onclick="login()">Login</button>
+<p id="error" style="color:red;"></p>
+</div>
+
+<!-- WEBSITE -->
+<div id="mainWebsite" style="display:none;">
+
 <nav>
-<button class="active" data-page="home">Home</button>
+<button data-page="home" class="active">Home</button>
 <button data-page="aptitude">Aptitude</button>
 <button data-page="coding">Coding</button>
 <button data-page="reasoning">Reasoning</button>
 </nav>
 
-<div class="content" id="contentArea">
-<h1 class="page-title">Home</h1>
-<p style="text-align:center;font-size:18px;">
-Welcome to the Digital Exam Preparation Portal 🚀  
-Select a subject from above to start learning.
-</p>
+<div class="content" id="contentArea"></div>
+
+<button class="logout-btn" onclick="logout()">Logout</button>
+
 </div>
 
 <script>
-const navButtons = document.querySelectorAll('nav button');
-const contentArea = document.getElementById('contentArea');
 
-let materials = {
+function login(){
+    if(username.value==="admin" && password.value==="1234"){
+        loginPage.style.display="none";
+        mainWebsite.style.display="block";
+        renderPage("home");
+    }else{
+        error.innerText="Invalid login";
+    }
+}
 
+function logout(){
+    mainWebsite.style.display="none";
+    loginPage.style.display="block";
+}
+
+/* ALL PDFs ADDED */
+let materials={
 aptitude:[
-{
-title:"Area of Triangle",
-notes:"Formula and solved examples.",
-pdfURL:"AREA%20OF%20TRIANGLE.pdf"
-},
-{
-title:"Dice",
-notes:"Important dice problems.",
-pdfURL:"DICE.pdf"
-},
-{
-title:"LCM & HCF",
-notes:"Concepts and shortcut methods.",
-pdfURL:"LCM%20%26%20HCF.pdf"
-},
-{
-title:"Percentages",
-notes:"Percentage tricks.",
-pdfURL:"PERCENTSGES.pdf"
-},
-{
-title:"Sum of Natural Numbers",
-notes:"Formula and applications.",
-pdfURL:"SUM%20OF%20NATURAL%20NUMBERS.pdf"
-}
+{title:"Area of Triangle",pdf:"AREA%20OF%20TRIANGLE.pdf"},
+{title:"Dice",pdf:"DICE.pdf"},
+{title:"LCM & HCF",pdf:"LCM%20%26%20HCF.pdf"},
+{title:"Percentages",pdf:"PERCENTSGES.pdf"},
+{title:"Sum of Natural Numbers",pdf:"SUM%20OF%20NATURAL%20NUMBERS.pdf"}
 ],
-
 coding:[
-{
-title:"C Language",
-notes:"Basics and programs.",
-pdfURL:"c_language.pdf"
-},
-{
-title:"Java",
-notes:"OOP concepts.",
-pdfURL:"java.pdf"
-},
-{
-title:"Python",
-notes:"Data types and OOP.",
-pdfURL:"python.pdf"
-},
-{
-title:"DBMS",
-notes:"SQL and normalization.",
-pdfURL:"dbms.pdf"
-},
-{
-title:"HTML",
-notes:"Web structure.",
-pdfURL:"html.pdf"
-},
-{
-title:"CSS",
-notes:"Styling concepts.",
-pdfURL:"css.pdf"
-},
-{
-title:"JavaScript",
-notes:"DOM and events.",
-pdfURL:"javascript.pdf"
-}
+{title:"C Language",pdf:"c_language.pdf"},
+{title:"Java",pdf:"java.pdf"},
+{title:"Python",pdf:"python.pdf"},
+{title:"DBMS",pdf:"dbms.pdf"},
+{title:"HTML",pdf:"html.pdf"},
+{title:"CSS",pdf:"css.pdf"},
+{title:"JavaScript",pdf:"javascript.pdf"}
 ],
-
 reasoning:[
-{
-title:"Reasoning Complete Material",
-notes:"Logical reasoning concepts and practice questions.",
-pdfURL:"reasoning.pdf"
-}
+{title:"Reasoning Complete Material",pdf:"reasoning.pdf"}
 ]
-
 };
 
 function renderPage(page){
 
+let buttons=document.querySelectorAll("nav button");
+buttons.forEach(btn=>btn.classList.remove("active"));
+document.querySelector(`[data-page='${page}']`).classList.add("active");
+
 if(page==="home"){
 contentArea.innerHTML=`
-<h1 class="page-title">Home</h1>
-<p style="text-align:center;font-size:18px;">
-Welcome to the Digital Exam Preparation Portal 🚀  
-Select a subject from above to start learning.
-</p>`;
+<h1 class="page-title">Welcome to the digital exam preparation portal 🖤</h1>
+<p style="text-align:center;">Select a subject to start learning</p>`;
 return;
 }
 
-let subs=materials[page];
+let html=`<h1 class="page-title">${page.toUpperCase()}</h1>`;
 
-let html=`<h1 class="page-title">${page.charAt(0).toUpperCase()+page.slice(1)}</h1>`;
-
-subs.forEach(sub=>{
+materials[page].forEach(item=>{
 html+=`
 <div class="subtopic">
-<h3>${sub.title}</h3>
-<p>${sub.notes}</p>
-<a href="${sub.pdfURL}" target="_blank">View PDF</a>
-</div>
-`;
+<h3>${item.title}</h3>
+<a href="${item.pdf}" target="_blank">View PDF</a>
+</div>`;
 });
 
 contentArea.innerHTML=html;
 }
 
-navButtons.forEach(btn=>{
+document.querySelectorAll("nav button").forEach(btn=>{
 btn.addEventListener("click",()=>{
-navButtons.forEach(b=>b.classList.remove("active"));
-btn.classList.add("active");
-renderPage(btn.dataset.page);
+renderPage(btn.getAttribute("data-page"));
 });
 });
 
 renderPage("home");
+
 </script>
 
 </body>
 </html>
+
