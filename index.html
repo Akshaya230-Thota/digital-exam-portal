@@ -187,8 +187,18 @@ document.querySelector(`[data-page='${page}']`).classList.add("active");
 
 if(page==="home"){
 contentArea.innerHTML=`
+
 <h1 class="page-title">Welcome to the digital exam preparation portal 🖤</h1>
-<p style="text-align:center;">Select a subject to start learning</p>`;
+
+<p style="text-align:center;">Select a subject to start learning</p>
+
+<div style="text-align:center; margin-top:20px;">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF9VSSHvSTtXZanc-VyxEhwQmpcE4ROxrvcw&s" 
+style="width:350px;border-radius:15px;">
+</div>
+
+`;
+
 return;
 }
 
@@ -217,5 +227,6 @@ renderPage("home");
 
 </body>
 </html>
+
 
 
